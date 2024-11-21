@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ContractsAppProg.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContractsAppProg.Data
 {
@@ -8,8 +9,7 @@ namespace ContractsAppProg.Data
             : base(options)
         {
         }
-
-        // DbSets for your entities
-        public DbSet<CustomClaim> Claims { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Claim> Claims { get; set; } // Add Claims DbSet
     }
 }

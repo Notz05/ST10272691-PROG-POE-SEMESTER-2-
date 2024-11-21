@@ -1,38 +1,43 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactsAppProg.Models;
+using ContractsAppProg.Data;
 using ContractsAppProg.Models;
+using Microsoft.AspNetCore.Mvc;
 
-public class AccountController : Controller
+namespace ContractsAppProg.Controllers
 {
-    // Display the login page
-    [HttpGet]
-    public IActionResult Login()
+    public class AccountController : Controller
     {
-        return View();
-    }
+        private readonly ApplicationDbContext _context;
 
-    // Handle the form submission
-    [HttpPost]
-    public IActionResult Login(LoginViewModel model)
-    {
-        if (ModelState.IsValid)
+        public AccountController(ApplicationDbContext context)
         {
-            // Set the user's role and redirect them to their specific page
-            // This can be updated to fit your authentication mechanism
-            if (model.Role == "HR")
-            {
-                return RedirectToAction("Index", "HR");
-            }
-            else if (model.Role == "Lecturer")
-            {
-                return RedirectToAction("Index", "Lecturer");
-            }
-            else if (model.Role == "ProgramCoordinator")
-            {
-                return RedirectToAction("Index", "ProgramCoordinator");
-            }
+            _context = context;
         }
 
-        // If validation fails, show the login page again
-        return View();
+        // Login GET
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // Login POST
+        [HttpPost]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _context.Users
+                    .FirstOrDefault(u => u.Username == model.Username && u.Password == model.Password);
+
+                if (user != null)
+                {
+                    TempData["Role"] = user.Role;
+                    return RedirectToAction("Index", "Home");
+                }
+                ModelState.AddModelError("", "Invalid username or password");
+            }
+
+            return View(model);
+        }
     }
 }

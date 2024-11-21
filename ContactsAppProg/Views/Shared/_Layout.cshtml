@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] - ContactsAppProg</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ContactsAppProg.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -23,8 +22,29 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
+                        @if (ViewBag.Role == "Lecturer")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Claim" asp-action="SubmitClaim">Submit Claim</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Claim" asp-action="TrackClaim">Track Claim</a>
+                            </li>
+                        }
+                        else if (ViewBag.Role == "HR")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Claim" asp-action="TrackClaim">Track Claim</a>
+                            </li>
+                        }
+                        else if (ViewBag.Role == "ProgramCoordinator")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Claim" asp-action="TrackClaim">Track Claim</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -35,7 +55,6 @@
             @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - ContactsAppProg - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
