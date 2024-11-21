@@ -1,0 +1,122 @@
+﻿@*  *@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: antiquewhite;
+    }
+
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 50px;
+        font-family: Arial, sans-serif;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: calc(100vh - 60px);
+        background-color: antiquewhite;
+    }
+
+    .intro {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+        .intro p {
+            font-size: 18px;
+            margin: 0;
+        }
+
+    .text-box-container {
+        display: flex;
+        justify-content: space-around;
+        gap: 1em;
+        width: 100%;
+        max-width: 1000px;
+    }
+
+    .text-box {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 1em;
+        text-align: center;
+        flex: 1;
+        max-width: 300px;
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-top: 0;
+    }
+
+    p {
+        font-size: 14px;
+        margin-bottom: 1em;
+    }
+
+    .button {
+        display: inline-block;
+        padding: 10px 15px;
+        font-size: 14px;
+        text-align: center;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .button:active {
+            background-color: #004080;
+        }
+</style>
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <h1>Welcome to The Contract Monthly Claim System</h1>
+    </header>
+    <main>
+        <section class="intro">
+            <p>Select an option below to get started:</p>
+        </section>
+       
+
+        <h2>Welcome! Choose Your Role</h2>
+        <div>
+            <a href="@Url.Action("Login", "Home", new { role = "Lecturer" })" class="btn btn-primary">Lecturer</a>
+            <a href="@Url.Action("Login", "Home", new { role = "HR" })" class="btn btn-primary">HR</a>
+            <a href="@Url.Action("Login", "Home", new { role = "ProgramCoordinator" })" class="btn btn-primary">Program Co-ordinator</a>
+        </div>
+
+    </main>
+</body>
+</html>
